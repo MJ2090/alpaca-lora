@@ -37,8 +37,6 @@ Below is an instruction that describes a task. Write a response that appropriate
 
 def create_prompt(instruction: str) -> str:
     return PROMPT_TEMPLATE.replace("[INSTRUCTION]", instruction)
- 
-print(create_prompt("What is the meaning of life?"))
 
 def generate_response(prompt: str, model: PeftModel) -> GreedySearchDecoderOnlyOutput:
     encoding = tokenizer(prompt, return_tensors="pt")
@@ -66,6 +64,12 @@ def format_response(response: GreedySearchDecoderOnlyOutput) -> str:
 def ask_alpaca(prompt: str, model: PeftModel = model) -> str:
     prompt = create_prompt(prompt)
     response = generate_response(prompt, model)
+    print(prompt)
     print(format_response(response))
+    print("")
     
 ask_alpaca("What is the meaning of life?")
+ask_alpaca("What is the answer to the ultimate question of the universe?")
+ask_alpaca("Who is Abraham Lincoln?")
+ask_alpaca("Why the sky is blue?")
+ask_alpaca("Tell me a short story about a smart hunter.")
