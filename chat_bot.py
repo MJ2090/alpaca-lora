@@ -62,3 +62,17 @@ def ask_alpaca(prompt: str, model: PeftModel = model) -> str:
     print(format_response(response))
     print("")
      
+def run_chat():
+    current_history = ''
+    base_ins = 'continue the dialogue between a Human and an Assistant, your role is the Assistant.\n'
+    instruct = base_ins
+    while True:
+        value = input("Human: \n")
+        if value == 'bbb':
+            break
+
+        current_history = current_history + f'Human: {value}\n'
+        instruct = base_ins + current_history
+        response = ask_alpaca(prompt = instruct)
+        current_history = current_history + f'Assistant: {response}\n'
+        print("Assistant:\n", response)
