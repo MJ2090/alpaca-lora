@@ -73,9 +73,5 @@ def ask_alpaca(prompt: str, model: PeftModel) -> str:
     print(format_response(response))
     
 
-def run_it(base_model: str="",model_path: str=""):
-    print(base_model, model_path)
-
-
 if __name__ == "__main__":
-    fire.Fire(run_it)
+    fire.Fire(run_fine_tuend_model)
