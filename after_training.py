@@ -24,7 +24,10 @@ def run_fine_tuend_model(base_model: str="decapoda-research/llama-7b-hf",model_p
     model = model.eval()
     model = torch.compile(model)
 
-    my_p = ["What is the meaning of life?"]
+    my_p = ["What is the meaning of life?",
+           "I lost my job, not feedling well.",
+           "I lost my best friend, i am so sad.",
+           "i failed to pass the exam in college"]
     for prompt in my_p:
         ask_alpaca(prompt, model, tokenizer)
 
