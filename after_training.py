@@ -4,6 +4,7 @@ import transformers
 import textwrap
 from transformers import LlamaTokenizer, LlamaForCausalLM, GenerationConfig
 from transformers.generation.utils import GreedySearchDecoderOnlyOutput
+import fire
  
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DEVICE
@@ -35,8 +36,10 @@ Below is an instruction that describes a task. Write a response that appropriate
 ### Response:
 """
 
+
 def create_prompt(instruction: str) -> str:
     return PROMPT_TEMPLATE.replace("[INSTRUCTION]", instruction)
+
 
 def generate_response(prompt: str, model: PeftModel) -> GreedySearchDecoderOnlyOutput:
     encoding = tokenizer(prompt, return_tensors="pt")
@@ -56,20 +59,28 @@ def generate_response(prompt: str, model: PeftModel) -> GreedySearchDecoderOnlyO
             max_new_tokens=256,
         )
       
+
 def format_response(response: GreedySearchDecoderOnlyOutput) -> str:
     decoded_output = tokenizer.decode(response.sequences[0])
     response = decoded_output.split("### Response:")[1].strip()
     return "\n".join(textwrap.wrap(response))
+
 
 def ask_alpaca(prompt: str, model: PeftModel = model) -> str:
     prompt = create_prompt(prompt)
     response = generate_response(prompt, model)
     print(prompt)
     print(format_response(response))
-    print("")
     
-ask_alpaca("What is the meaning of life?")
-ask_alpaca("What is the answer to the ultimate question of the universe?")
-ask_alpaca("Who is Abraham Lincoln?")
-ask_alpaca("Why the sky is blue?")
-ask_alpaca("Tell me a short story about a smart hunter.")
+
+def run_it(base_model: str="",model_path: str=""):
+    print(base_model, model_path)
+
+if __name__ == "__main__":
+    fire.Fire(run_it)
+
+# ask_alpaca("What is the meaning of life?")
+# ask_alpaca("What is the answer to the ultimate question of the universe?")
+# ask_alpaca("Who is Abraham Lincoln?")
+# ask_alpaca("Why the sky is blue?")
+# ask_alpaca("Tell me a short story about a smart hunter.")
