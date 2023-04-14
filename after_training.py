@@ -26,7 +26,7 @@ def run_fine_tuend_model(base_model: str="decapoda-research/llama-7b-hf",model_p
 
     my_p = ["What is the meaning of life?"]
     for prompt in my_p:
-        ask_alpaca(prompt)
+        ask_alpaca(prompt, model)
 
 
 def create_prompt(instruction: str) -> str:
