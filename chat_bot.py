@@ -49,7 +49,7 @@ def generate_response(prompt: str, model: PeftModel) -> GreedySearchDecoderOnlyO
             output_scores=True,
             max_new_tokens=256,
         )
-      
+
 def format_response(response: GreedySearchDecoderOnlyOutput) -> str:
     decoded_output = tokenizer.decode(response.sequences[0])
     response = decoded_output.split("### Response:")[1].strip()
@@ -61,7 +61,7 @@ def ask_alpaca(prompt: str, model: PeftModel = model) -> str:
     print(prompt)
     print(format_response(response))
     print("")
-     
+
 def run_chat():
     current_history = ''
     base_ins = 'continue the dialogue between a Human and an Assistant, your role is the Assistant.\n'
