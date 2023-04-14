@@ -70,7 +70,7 @@ def ask_alpaca(prompt: str, model: PeftModel, tokenizer) -> str:
     prompt = create_prompt(prompt)
     response = generate_response(prompt, model, tokenizer)
     print(prompt)
-    print(format_response(response))
+    print(format_response(response, tokenizer))
     
 
 if __name__ == "__main__":
