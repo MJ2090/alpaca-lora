@@ -27,7 +27,7 @@ def main(
     lora_weights: str = "tloen/alpaca-lora-7b",
     prompt_template: str = "",  # The prompt template to use, will default to alpaca.
     server_name: str = "127.0.0.1",  # Allows to listen on all interfaces by providing '0.0.0.0'
-    share_gradio: bool = False,
+    share_gradio: bool = True,
 ):
     assert (
         base_model
@@ -139,13 +139,13 @@ def main(
             ),
         ],
         outputs=[
-            gr.inputs.Textbox(
+            gr.components.Textbox(
                 lines=5,
-                label="Output",
+                label="Truncated Output",
             )
         ],
-        title="🦙🌲 Alpaca-LoRA",
-        description="Alpaca-LoRA is a 7B-parameter LLaMA model finetuned to follow instructions. It is trained on the [Stanford Alpaca](https://github.com/tatsu-lab/stanford_alpaca) dataset and makes use of the Huggingface LLaMA implementation. For more information, please visit [the project's website](https://github.com/tloen/alpaca-lora).",  # noqa: E501
+        title="Original Alpaca-LoRA",
+        description="Have fun.",  # noqa: E501
     ).launch(server_name=server_name, share=share_gradio)
     # Old testing code follows.
 
